@@ -1,0 +1,10 @@
+/** @format */
+
+.hero_section {
+  background-image: url(../assets/images/Hero_image.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 200px 0;
+}
+
+

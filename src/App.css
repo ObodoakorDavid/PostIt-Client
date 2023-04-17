@@ -1,0 +1,22 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+.App {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+.text-blue {
+  color: #0086b0;
+}
+
+.btn-bg-main {
+  background-color: #0086b0 !important;
+}
+
+footer {
+  background-color: #292929;
+  color: #ffffff;
+  padding: 40px 5%;
+}
