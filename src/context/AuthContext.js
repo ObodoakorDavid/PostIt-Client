@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const baseURL = "http://127.0.0.1:8000/api/v1";
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   let login = async (body) => {
     let response = await fetch(`${baseURL}/auth/token/login/`, {
@@ -30,15 +30,20 @@ export const AuthProvider = ({ children }) => {
     });
     let data = await response.json();
     console.log(data);
+
     setToken(data.auth_token);
+
     localStorage.setItem("token", JSON.stringify(data.auth_token));
+    if (data.auth_token) {
+      navigate("/dashboard");
+    }
   };
 
   let getUser = async () => {
     let response = await fetch(`${baseURL}/auth/users/me`, {
       method: "GET",
       headers: {
-        Authorization: `Token ${token}`,
+        "Authorization": `Token ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -46,8 +51,6 @@ export const AuthProvider = ({ children }) => {
     console.log(data);
     setUser(data);
   };
-
-
 
   useEffect(() => {
     console.log(token);
