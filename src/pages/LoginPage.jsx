@@ -1,13 +1,18 @@
 /** @format */
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // import { useAuth } from "../hooks/useAuth";
 import AuthContext from "../context/AuthContext";
+import { Toaster } from "react-hot-toast";
+
 
 const LoginPage = () => {
-  const { login } = useContext(AuthContext);
+  const { login, token } = useContext(AuthContext);
+  useEffect(()=>{
+    console.log(token);
+  })
 
   const {
     register,
@@ -24,6 +29,7 @@ const LoginPage = () => {
 
   return (
     <div className="p-5">
+      <Toaster />
       <h2 className=" fw-bold py-4">Welcome Back</h2>
       <form
         className="d-flex flex-column gap-3"

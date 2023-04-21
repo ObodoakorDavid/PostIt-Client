@@ -2,6 +2,7 @@
 
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -10,32 +11,37 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => {
-    return localStorage.getItem("token") || null;
+    return JSON.parse(localStorage.getItem("token")) || null;
   });
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [data, setData] = useState(null);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(true);
   const baseURL = "http://127.0.0.1:8000/api/v1";
 
   const navigate = useNavigate();
+  // const notify = (message, type) =>
+  //   toast.success(`Welcome ${user?.username}`, {
+  //     position: "top-right",
+  //   });
 
   let login = async (body) => {
     let response = await fetch(`${baseURL}/auth/token/login/`, {
       method: "POST",
       headers: {
-        // Authorization: `Token ${token}`,
+        // "Authorization": `Token ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     });
     let data = await response.json();
-    console.log(data);
-
-    setToken(data.auth_token);
-
-    localStorage.setItem("token", JSON.stringify(data.auth_token));
     if (data.auth_token) {
+      setToken(data.auth_token);
+      localStorage.setItem("token", JSON.stringify(data.auth_token));
       navigate("/dashboard");
+    } else {
+      toast.error(`invalid Credentials`, {
+        position: "top-right",
+      });
     }
   };
 
@@ -49,7 +55,32 @@ export const AuthProvider = ({ children }) => {
     });
     let data = await response.json();
     console.log(data);
-    setUser(data);
+    if (data.username) {
+      setUser(data);
+      toast.success(`Welcome ${data.username}`, {
+        position: "top-right",
+      });
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const logOutUser = async () => {
+    let response = await fetch(`${baseURL}/auth/token/logout`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    localStorage.removeItem("token");
+    setToken(null);
+    setUser(null);
+    navigate("/");
+    toast.success("Log Out Successfull", {
+      position: "top-right",
+    });
   };
 
   useEffect(() => {
@@ -61,6 +92,7 @@ export const AuthProvider = ({ children }) => {
     login,
     token,
     getUser,
+    logOutUser,
   };
 
   return (

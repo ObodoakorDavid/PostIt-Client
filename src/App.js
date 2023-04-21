@@ -9,6 +9,8 @@ import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import SignupPage from "./pages/SignupPage";
 import Stories from "./pages/Stories";
+import MyStories from "./pages/MyStories";
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/stories" element={<Stories />} />
+              <Route path="/my-stories" element={<MyStories/>} />
             </Route>
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<LoginPage />} />

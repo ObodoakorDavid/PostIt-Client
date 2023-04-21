@@ -3,22 +3,52 @@
 import React, { useContext, useEffect } from "react";
 import RootLayout from "../layouts/RootLayout";
 import AuthContext from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import scrabble from "../assets/images/scrabble.png";
 
 const Dashboard = () => {
   const { getUser, user } = useContext(AuthContext);
-  const navigate = useNavigate()
+  // const navigate = useNavigate();
 
   useEffect(() => {
     getUser();
-    if (!user){
-      navigate('/login')
-    }
   }, []);
+
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
 
   return (
     <RootLayout>
-      <h1>Welcome {user && user.username}</h1>
+      <Toaster />
+      <div
+        style={{
+          maxWidth: "1000px",
+        }}
+        className=" d-flex flex-column flex-lg-row gap-2 px-4 mx-auto"
+      >
+        <div className="my-5 mx-md-0 text-start">
+          <h1 className="fw-bold">Welcome {user && user.username},</h1>
+          <p>
+            Lorem ipsum dolor sit ameetur adipiscing elit. Coctetur egestas
+            massa velit aliquam. Molestim bibendum hnt ipsum orci, platea
+            aliquam id ut.
+          </p>
+          <div className="d-flex gap-3">
+            <Link to="/my-stories" className="btn btn-bg-main text-white px-5">
+              My Stories
+            </Link>
+            <Link
+              to="/stories"
+              className="btn bg-white border-main text-blue fw-semibold px-5 "
+            >
+              Go to Feed
+            </Link>
+          </div>
+        </div>
+        <img className="w-50 mx-auto" src={scrabble} alt="" />
+      </div>
     </RootLayout>
   );
 };
