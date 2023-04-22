@@ -93,6 +93,7 @@ export const AuthProvider = ({ children }) => {
     token,
     getUser,
     logOutUser,
+    baseURL,
   };
 
   return (

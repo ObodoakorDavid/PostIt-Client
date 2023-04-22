@@ -24,3 +24,9 @@ footer {
   color: #ffffff;
   padding: 40px 5%;
 }
+
+.story-tags{
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}

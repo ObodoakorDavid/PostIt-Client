@@ -1,10 +1,14 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
 import RootLayout from "../layouts/RootLayout";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const MyStories = () => {
+  const { token, logOutUser } = useContext(AuthContext);
+  
+
   return (
     <RootLayout>
       <div className="py-4">
