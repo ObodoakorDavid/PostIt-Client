@@ -30,3 +30,7 @@ footer {
   left: 10px;
   bottom: 10px;
 }
+
+input:focus {
+  outline: none !important;
+}

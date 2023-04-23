@@ -3,13 +3,11 @@
 import React from "react";
 import RootLayout from "../layouts/RootLayout";
 import "../styles/Homepage.css";
-import { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
   return (
     <RootLayout>
-      <Toaster />
       <div className="hero_section text-start">
         <div
           style={{

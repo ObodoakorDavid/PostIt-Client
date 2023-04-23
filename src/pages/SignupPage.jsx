@@ -1,36 +1,100 @@
 /** @format */
 
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import AuthContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
+  const { signUp, token, authenticating } = useContext(AuthContext);
+  const isAuthenticating = authenticating ? "spinner-border mx-auto" : "";
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log("working");
+    console.log(errors.email);
+    signUp(data);
+  };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/dashboard");
+    }
+  });
+
   return (
-    <div>
-      <h2 className=" fw-semibold">
+    <div className="p-5">
+      <h2 className="fw-bold py-4">
         Join Post<span className="text-blue">it</span>
       </h2>
-      <p>
+      <p className=" fw-semibold">
         Enter your email address to create an account on Post
-        <span className="text-blue">it</span>
+        <span className="text-blue">it</span>.
       </p>
-      <form action="">
-        <div>
-          <label htmlFor="username">Username</label>
-          <input id="username" type="text" />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="d-flex flex-column gap-3"
+      >
+        <div className="d-flex flex-column gap-1">
+          <label className="d-block py-2 fw-semibold" htmlFor="username">
+            Username
+          </label>
+          <input
+            className=" border-0 border-bottom border-secondary border-1 py-2"
+            id="username"
+            type="text"
+            {...register("username", {
+              required: true,
+            })}
+          />
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" />
+        <div className="d-flex flex-column gap-1">
+          <label className="d-block py-2 fw-semibold" htmlFor="email">
+            Email
+          </label>
+          <input
+            className=" border-0 border-bottom border-secondary border-1 py-2"
+            id="email"
+            type="email"
+            {...register("email", {
+              required: true,
+            })}
+          />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" />
+        <div className="d-flex flex-column gap-1">
+          <label className="d-block py-2 fw-semibold" htmlFor="password">
+            Password
+          </label>
+          <input
+            className=" border-0 border-bottom border-secondary border-1 py-2"
+            id="password"
+            type="password"
+            {...register("password", {
+              required: true,
+              minLength: 10,
+            })}
+          />
         </div>
-        <button className="btn btn-bg-main text-white">Continue</button>
+        <button
+          className={`btn btn-bg-main text-white my-3 ${isAuthenticating}`}
+        >
+          Continue
+        </button>
       </form>
-      <p>
+      <p className="fw-bold">
         Already have an account?
-        <Link className=" text-decoration-none text-blue">Sign In</Link>
+        <Link to="/login" className="text-decoration-none text-blue ps-2">
+          Sign In
+        </Link>
       </p>
     </div>
   );

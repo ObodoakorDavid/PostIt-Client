@@ -39,19 +39,21 @@ const Navbarr = () => {
             Log Out
           </Link>
         ) : (
-          <Link
-            className=" text-decoration-none text-black fw-semibold"
-            to="/login"
-          >
-            Sign In
-          </Link>
+          <div className="d-flex gap-3 align-items-center">
+            <Link
+              className=" text-decoration-none text-black fw-semibold"
+              to="/login"
+            >
+              Sign In
+            </Link>
+            <Link
+              className="btn btn-bg-main text-white px-3 py-1 fw-semibold"
+              to="/login"
+            >
+              Get Started
+            </Link>
+          </div>
         )}
-        <Link
-          className="btn btn-bg-main text-white px-3 py-1 fw-semibold"
-          to="#"
-        >
-          Get Started
-        </Link>
       </div>
     </nav>
   );

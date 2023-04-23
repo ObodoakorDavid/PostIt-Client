@@ -1,18 +1,14 @@
 /** @format */
 
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-// import { useAuth } from "../hooks/useAuth";
 import AuthContext from "../context/AuthContext";
-import { Toaster } from "react-hot-toast";
-
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { login, token } = useContext(AuthContext);
-  useEffect(()=>{
-    console.log(token);
-  })
+  const { login, authenticating, token } = useContext(AuthContext);
+  const isAuthenticating = authenticating ? "spinner-border mx-auto" : "";
 
   const {
     register,
@@ -24,12 +20,19 @@ const LoginPage = () => {
     console.log(data);
     console.log("working");
     console.log(errors.email);
-    login(data)
+    login(data);
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/dashboard");
+    }
+  });
 
   return (
     <div className="p-5">
-      <Toaster />
       <h2 className=" fw-bold py-4">Welcome Back</h2>
       <form
         className="d-flex flex-column gap-3"
@@ -45,7 +48,6 @@ const LoginPage = () => {
             type="email"
             {...register("email", {
               required: true,
-              minLength: 15,
             })}
           />
           {errors.email && errors.email.type === "required" && (
@@ -76,11 +78,18 @@ const LoginPage = () => {
             </p>
           )}
         </div>
-        <button className="btn btn-bg-main text-white my-3">Continue</button>
+        <button
+          disabled={authenticating}
+          className={`btn btn-bg-main text-white my-3 ${isAuthenticating}`}
+        >
+          Continue
+        </button>
       </form>
-      <p className="fw-semibold">
+      <p className="fw-bold">
         No account?
-        <Link className="text-decoration-none text-blue ps-2">Sign Up</Link>
+        <Link to="/signup" className="text-decoration-none text-blue ps-2">
+          Sign Up
+        </Link>
       </p>
     </div>
   );

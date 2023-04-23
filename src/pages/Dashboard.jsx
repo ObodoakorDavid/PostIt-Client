@@ -4,24 +4,19 @@ import React, { useContext, useEffect } from "react";
 import RootLayout from "../layouts/RootLayout";
 import AuthContext from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+
 import scrabble from "../assets/images/scrabble.png";
 
 const Dashboard = () => {
   const { getUser, user } = useContext(AuthContext);
-  // const navigate = useNavigate();
-
+  
   useEffect(() => {
     getUser();
   }, []);
 
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
-
   return (
     <RootLayout>
-      <Toaster />
+     
       <div
         style={{
           maxWidth: "1000px",
