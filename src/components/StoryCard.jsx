@@ -6,9 +6,9 @@ import profilePicture from '../assets/images/profile_picture.png'
 
 const StoryCard = ({ story }) => {
   return (
-    <div key={story.id} className="text-start px-4">
+    <div key={story.id} className="text-start col-sm-6 col-md-4 ">
       <div className=" position-relative">
-        <img src={lifestyle} alt="" />
+        <img className="w-100" src={lifestyle} alt="" />
         <button className="story-tags bg-primary btn text-white px-2 py-0">{story.tags}</button>
       </div>
         <h2>{story.title}</h2>

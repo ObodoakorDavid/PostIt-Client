@@ -15,13 +15,13 @@ const Homepage = () => {
           }}
           className="mx-auto px-4"
         >
-          <h1 className="fw-bolder">Stay Curious.</h1>
-          <p className="w-75 fw-semibold">
+          <h1 className="fw-bolder py-2">Stay Curious.</h1>
+          <p className="fw-semibold">
             Lorem ipsum dolor sit ameetur adipiscing elit. Coctetur egestas
             massa velit aliquam. Molestim bibendum hnt ipsum orci, platea
             aliquam id ut.
           </p>
-          <Link to='signup' className="btn btn-bg text-white btn-bg-main">Get Started</Link>
+          <Link to='signup' className="btn btn-bg text-white btn-bg-main px-4">Get Started</Link>
         </div>
       </div>
 

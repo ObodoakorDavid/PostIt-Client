@@ -24,10 +24,20 @@ const Stories = () => {
   }, []);
   return (
     <RootLayout>
-      {!loading &&
-        stories.map((eachStory) => {
-          return <StoryCard key={eachStory.id} story={eachStory} />;
-        })}
+      {!loading && (
+        <div
+          style={{
+            maxWidth: "1000px",
+          }}
+          className="px-4 mx-auto"
+        >
+          <div className="row">
+            {stories.map((eachStory) => {
+              return <StoryCard key={eachStory.id} story={eachStory} />;
+            })}
+          </div>
+        </div>
+      )}
     </RootLayout>
   );
 };

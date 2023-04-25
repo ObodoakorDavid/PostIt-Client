@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     let response = await fetch(`${baseURL}/auth/users/me`, {
       method: "GET",
       headers: {
-        "Authorization": `Token ${token}`,
+        Authorization: `Token ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
       setUser(data);
       toast.success(`Welcome ${data.username}`, {
         position: "top-right",
-        id: 'welcome'
+        id: "welcome",
       });
     } else {
       navigate("/login");
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     let response = await fetch(`${baseURL}/auth/token/logout`, {
       method: "POST",
       headers: {
-        "Authorization": `Token ${token}`,
+        Authorization: `Token ${token}`,
         "Content-Type": "application/json",
       },
     });
@@ -94,11 +94,28 @@ export const AuthProvider = ({ children }) => {
 
     let data = await response.json();
 
-    if (response.status === 400){
-      toast.error(`Username or email already taken`, {
-        position: "top-right",
-      });
-      setaAuthenticating(false);
+    if (response.status === 400) {
+      if (data.password) {
+        data.password.forEach((d) => {
+          toast.error(d, {
+            position: "top-right",
+          });
+        });
+        setaAuthenticating(false);
+      }
+      if (data.email) {
+        data.email.forEach((d) => {
+          toast.error(d, {
+            position: "top-right",
+          });
+        });
+        setaAuthenticating(false);
+      }
+      // toast.error(`Username or email already taken`, {
+      //   position: "top-right",
+      // });
+      // setaAuthenticating(false);
+      console.log(data);
       return;
     }
 

@@ -11,18 +11,29 @@ import SignupPage from "./pages/SignupPage";
 import Stories from "./pages/Stories";
 import MyStories from "./pages/MyStories";
 import { Toaster } from "react-hot-toast";
+import CreateStory from "./pages/CreateStory";
+import EditStory from "./pages/EditStory";
+import AllUserStories from "./components/AllUserStories";
+import DraftUserStories from "./components/DraftUserStories";
+import PublishedUserStories from "./components/PublishedUserStories";
 
 function App() {
   return (
     <div className="App">
-      <Toaster/>
+      <Toaster />
       <BrowserRouter>
         <AuthProvider>
           <Routes>
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/stories" element={<Stories />} />
-              <Route path="/my-stories" element={<MyStories />} />
+              <Route path="/my-stories" element={<MyStories />}>
+                <Route path="all" element={<AllUserStories />} />
+                <Route path="drafts" element={<DraftUserStories />} />
+                <Route path="published" element={<PublishedUserStories />} />
+              </Route>
+              <Route path="/create" element={<CreateStory />} />
+              <Route path="/edit" element={<EditStory />} />
             </Route>
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<LoginPage />} />

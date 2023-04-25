@@ -80,7 +80,7 @@ const SignupPage = () => {
             type="password"
             {...register("password", {
               required: true,
-              minLength: 10,
+              minLength: 7,
             })}
           />
         </div>
