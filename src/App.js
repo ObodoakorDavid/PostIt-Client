@@ -28,12 +28,12 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/stories" element={<Stories />} />
               <Route path="/my-stories" element={<MyStories />}>
-                <Route path="all" element={<AllUserStories />} />
+                <Route path="/my-stories" element={<AllUserStories />} />
                 <Route path="drafts" element={<DraftUserStories />} />
                 <Route path="published" element={<PublishedUserStories />} />
               </Route>
               <Route path="/create" element={<CreateStory />} />
-              <Route path="/edit" element={<EditStory />} />
+              <Route path="/edit/:id" element={<EditStory />} />
             </Route>
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<LoginPage />} />

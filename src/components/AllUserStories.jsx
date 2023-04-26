@@ -3,42 +3,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import { useFetch } from "../hooks/useFetch";
 
 const AllUserStories = () => {
   const { token, baseURL } = useContext(AuthContext);
-  const [stories, setStories] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const getData = async () => {
-      const res = await fetch(`${baseURL}/stories/user/`, {
-        method: "GET",
-        headers: {
-          Authorization: `Token ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      setStories(data);
-      setLoading(false);
-    };
-    getData();
-  }, []);
+  const { data, error, loading } = useFetch(`${baseURL}/stories/user/`, token);
+
   return (
     <div className="py-4 d-flex flex-column gap-4">
       {!loading &&
-        stories.map((eachStory) => {
+        data.map((eachStory) => {
+          const { id, title, story } = eachStory;
           return (
-            <div key={eachStory.id} className="d-flex text-start justify-content-between align-items-start px-4">
+            <div
+              key={id}
+              className="d-flex text-start justify-content-between align-items-start px-4"
+            >
               <div>
-                <h1>{eachStory.title}</h1>
-                <p>{eachStory.story}</p>
+                <h1>{title}</h1>
+                <p>{story}</p>
               </div>
               <div className="d-flex gap-3 align-items-center">
                 <Link
-                  to="/edit"
+                  to={`/edit/${id}`}
                   className="btn btn-bg-main text-white px-4 fw-semibold"
                 >
                   Edit Post
