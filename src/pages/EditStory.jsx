@@ -1,9 +1,15 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect } from "react";
 import RootLayout from "../layouts/RootLayout";
+import { useParams } from "react-router-dom";
 
 const EditStory = () => {
+  const { id } = useParams();
+  useEffect(() => {
+    console.log(id);
+  });
+
   return (
     <RootLayout>
       <div className="px-4 text-sm-start update-story">

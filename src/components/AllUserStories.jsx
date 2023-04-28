@@ -12,7 +12,8 @@ const AllUserStories = () => {
 
   return (
     <div className="py-4 d-flex flex-column gap-4">
-      {!loading &&
+      {loading && <p>Loading</p>}
+      {!loading && data &&
         data.map((eachStory) => {
           const { id, title, story } = eachStory;
           return (
@@ -38,6 +39,7 @@ const AllUserStories = () => {
             </div>
           );
         })}
+      {error && <p>{error}</p>}
     </div>
   );
 };
