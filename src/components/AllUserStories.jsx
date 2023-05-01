@@ -1,19 +1,23 @@
 /** @format */
 
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useFetch } from "../hooks/useFetch";
+import Loading from "../utils/Loading";
 
 const AllUserStories = () => {
   const { token, baseURL } = useContext(AuthContext);
 
   const { data, error, loading } = useFetch(`${baseURL}/stories/user/`, token);
 
+
+ 
   return (
     <div className="py-4 d-flex flex-column gap-4">
-      {loading && <p>Loading</p>}
-      {!loading && data &&
+      {loading && <Loading />}
+      {!loading &&
+        data &&
         data.map((eachStory) => {
           const { id, title, story } = eachStory;
           return (
@@ -22,7 +26,7 @@ const AllUserStories = () => {
               className="d-flex text-start justify-content-between align-items-start px-4"
             >
               <div>
-                <h1>{title}</h1>
+                <h1 className="fw-semibold">{title}</h1>
                 <p>{story}</p>
               </div>
               <div className="d-flex gap-3 align-items-center">

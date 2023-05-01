@@ -13,7 +13,7 @@ const Navbarr = () => {
       style={{
         maxWidth: "1000px",
       }}
-      className="d-flex justify-content-between px-4 py-3 mx-auto"
+      className="d-flex justify-content-between align-items-center px-4 py-3 mx-auto"
     >
       <Link to="/" className="fs-2 fw-bold text-decoration-none text-dark">
         Post<span className="text-blue">it</span>
@@ -21,11 +21,14 @@ const Navbarr = () => {
       <div className="d-flex gap-3 align-items-center">
         <Link
           to="/dashboard"
-          className=" text-decoration-none text-black fw-semibold"
+          className=" text-decoration-none text-black fw-semibold fs-4"
         >
           Stories
         </Link>
-        <Link className=" text-decoration-none text-black fw-semibold" to="#">
+        <Link
+          className=" text-decoration-none text-black fw-semibold fs-4"
+          to="#"
+        >
           Contact
         </Link>
         {token ? (
@@ -33,7 +36,7 @@ const Navbarr = () => {
             onClick={() => {
               logOutUser();
             }}
-            className=" text-decoration-none text-black fw-semibold"
+            className=" text-decoration-none text-black fw-semibold fs-4"
             to="/"
           >
             Log Out
@@ -41,13 +44,13 @@ const Navbarr = () => {
         ) : (
           <div className="d-flex gap-3 align-items-center">
             <Link
-              className=" text-decoration-none text-black fw-semibold"
+              className=" text-decoration-none text-black fw-semibold fs-4"
               to="/login"
             >
               Sign In
             </Link>
             <Link
-              className="btn btn-bg-main text-white px-3 py-1 fw-semibold"
+              className="btn btn-bg-main text-white px-3 py-1 fw-semibold fs-4"
               to="/login"
             >
               Get Started

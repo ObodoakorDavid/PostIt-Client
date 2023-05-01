@@ -1,10 +1,23 @@
 /** @format */
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Harmattan:wght@400;700&display=swap");
 
 .App {
   text-align: center;
+}
+
+p {
   font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6, a, button {
+  font-family: "Harmattan", sans-serif !important;
 }
 
 .text-blue {
@@ -25,13 +38,14 @@ footer {
   padding: 40px 5%;
 }
 
-.story-tags{
+.story-tags {
   position: absolute;
   left: 10px;
   bottom: 10px;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none !important;
 }
 
