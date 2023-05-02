@@ -16,6 +16,7 @@ import EditStory from "./pages/EditStory";
 import AllUserStories from "./components/AllUserStories";
 import DraftUserStories from "./components/DraftUserStories";
 import PublishedUserStories from "./components/PublishedUserStories";
+import ViewStory from "./pages/ViewStory";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               </Route>
               <Route path="/create" element={<CreateStory />} />
               <Route path="/edit/:id" element={<EditStory />} />
+              <Route path="/story/:id" element={<ViewStory />} />
             </Route>
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<LoginPage />} />
