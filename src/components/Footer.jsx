@@ -5,7 +5,12 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <div className="main-footer d-md-flex">
+      <div
+        style={{
+          maxWidth: "1000px",
+        }}
+        className="main-footer d-md-flex mx-auto"
+      >
         <div>
           <h2 className=" fs-5 fw-semibold text-md-start">
             About Post<span className="text-blue">it.</span>

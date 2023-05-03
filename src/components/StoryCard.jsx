@@ -6,7 +6,6 @@ import profilePicture from "../assets/images/profile_picture.png";
 import { Link } from "react-router-dom";
 
 const StoryCard = ({ story }) => {
-  
   return (
     <Link to={`/story/${story.id}`} className="text-start col-sm-6 col-md-4 ">
       <div className=" position-relative">

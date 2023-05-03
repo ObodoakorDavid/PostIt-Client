@@ -16,7 +16,9 @@ h2,
 h3,
 h4,
 h5,
-h6, a, button {
+h6,
+a,
+button {
   font-family: "Harmattan", sans-serif !important;
 }
 
@@ -52,4 +54,8 @@ textarea:focus {
 form img {
   top: -15px;
   left: 8px;
+}
+
+.try-it {
+  background-image: url("./assets/images/Rectangle\ 38.png");
 }

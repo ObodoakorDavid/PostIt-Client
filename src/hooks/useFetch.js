@@ -9,32 +9,60 @@ export const useFetch = (url, token) => {
 
   useEffect(() => {
     setTimeout(() => {
-      fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Token ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Something Went Wrong");
-          }
-          return res.json();
+      if (token) {
+        fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+          },
         })
-        .then((json) => {
-          setData(json);
-          console.log(json);
-          // setLoading(false);
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Something Went Wrong");
+            }
+            return res.json();
+          })
+          .then((json) => {
+            setData(json);
+            console.log(json);
+            // setLoading(false);
+          })
+          .catch((err) => {
+            // setLoading(false);
+            setError("Oooops! Something Went Wrong.");
+            console.log(err);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      } else {
+        fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
-        .catch((err) => {
-          // setLoading(false);
-          setError("Oooops! Something Went Wrong.");
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Something Went Wrong");
+            }
+            return res.json();
+          })
+          .then((json) => {
+            setData(json);
+            console.log(json);
+            // setLoading(false);
+          })
+          .catch((err) => {
+            // setLoading(false);
+            setError("Oooops! Something Went Wrong.");
+            console.log(err);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
     }, 3000);
   }, [url]);
 
