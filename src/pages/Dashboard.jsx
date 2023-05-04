@@ -9,20 +9,14 @@ import scrabble from "../assets/images/scrabble.png";
 
 const Dashboard = () => {
   const { getUser, user } = useContext(AuthContext);
-  
+
   useEffect(() => {
     getUser();
   }, []);
 
   return (
     <RootLayout>
-     
-      <div
-        style={{
-          maxWidth: "1000px",
-        }}
-        className=" d-flex flex-column flex-lg-row gap-2 px-4 mx-auto"
-      >
+      <div className=" d-flex flex-column flex-lg-row gap-2 px-4 mx-auto mw-1240">
         <div className="my-5 mx-md-0 text-start">
           <h1 className="fw-bold">Welcome {user && user.username},</h1>
           <p>

@@ -37,7 +37,7 @@ const CreateStory = () => {
 
   return (
     <RootLayout>
-      <div className="px-4 text-sm-start">
+      <div className="px-4 text-sm-start mw-1240 mx-auto">
         <h1 className="py-3 fw-bold">Create Story</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}

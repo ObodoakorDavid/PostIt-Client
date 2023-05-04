@@ -23,7 +23,7 @@ const MyStories = () => {
 
   return (
     <RootLayout>
-      <div className="py-4">
+      <div className="py-4 mw-1240 mx-auto">
         <div className="d-flex align-items-center justify-content-between px-4">
           <h1 className=" fw-bold">My Stories</h1>
           <Link to="/create" className=" btn text-white bg-dark px-4">

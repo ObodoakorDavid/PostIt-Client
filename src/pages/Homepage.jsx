@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import AuthContext from "../context/AuthContext";
 import Image from "../assets/images/Nature.png";
+import Loading from "../utils/Loading";
 
 const Homepage = () => {
   const { baseURL } = useContext(AuthContext);
@@ -15,12 +16,7 @@ const Homepage = () => {
   return (
     <RootLayout>
       <div className="hero_section text-start">
-        <div
-          style={{
-            maxWidth: "1000px",
-          }}
-          className="mx-auto px-4"
-        >
+        <div className="mx-auto px-4 mw-1240">
           <h1 className="fw-bolder py-2">Stay Curious.</h1>
           <p className="fw-semibold">
             Lorem ipsum dolor sit ameetur adipiscing elit. Coctetur egestas
@@ -33,15 +29,10 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div
-        style={{
-          maxWidth: "1000px",
-        }}
-        className=" d-flex flex-column flex-md-row gap-2 border border-2 mx-4 py-5 mt-5 border-light rounded-2 mx-auto"
-      >
-        {data &&
-          data.slice(0, 3).map((datum) => {
-            const { id, title, story, tags } = datum;
+      {data && (
+        <div className="d-flex flex-column flex-md-row gap-2 border border-2 mx-4 py-5 border-light rounded-2 mx-auto mw-1240">
+          {data.slice(0, 3).map((datum) => {
+            const { id, title, tags } = datum;
             return (
               <div
                 key={id}
@@ -59,20 +50,21 @@ const Homepage = () => {
                   </p>
                   <div className="">
                     <p className="m-0 text-start">{title}</p>
-                    {/* <p className="m-0 text-start">{story}</p> */}
                   </div>
                 </div>
               </div>
             );
           })}
-      </div>
+        </div>
+      )}
+
+      {loading && <Loading loading={loading} />}
 
       <div
         style={{
-          maxWidth: "1000px",
           width: "90%",
         }}
-        className="try-it mx-auto py-4 my-5"
+        className="try-it mx-auto py-4 my-5 mw-1240"
       >
         <h2 className="fw-bold">
           Try Post<span className="text-blue">It</span>.

@@ -9,12 +9,7 @@ const Navbarr = () => {
   console.log(token);
 
   return (
-    <nav
-      style={{
-        maxWidth: "1000px",
-      }}
-      className="d-flex justify-content-between align-items-center px-4 py-3 mx-auto"
-    >
+    <nav className="d-flex justify-content-between align-items-center px-4 py-3 mx-auto mw-1240">
       <Link to="/" className="fs-2 fw-bold text-decoration-none text-dark">
         Post<span className="text-blue">it</span>
       </Link>

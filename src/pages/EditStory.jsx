@@ -4,13 +4,12 @@ import React, { useEffect, useContext, useState } from "react";
 import RootLayout from "../layouts/RootLayout";
 import { useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import { useForm } from "react-hook-form";
 import { useFetch } from "../hooks/useFetch";
 import toast from "react-hot-toast";
 import Loading from "../utils/Loading";
 
 const EditStory = () => {
-  const { login, authenticating, token, baseURL } = useContext(AuthContext);
+  const { token, baseURL } = useContext(AuthContext);
   const { id } = useParams();
 
   const { data, loading, error } = useFetch(`${baseURL}/stories/${id}/`, token);
@@ -18,11 +17,6 @@ const EditStory = () => {
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
   const [story, setStory] = useState("");
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
 
   useEffect(() => {
     data && setTitle(data.title);
@@ -55,7 +49,7 @@ const EditStory = () => {
   return (
     <RootLayout>
       {data && (
-        <div className="px-4 text-sm-start update-story">
+        <div className="px-4 text-sm-start update-story mw-1240 mx-auto">
           <form
             onSubmit={(e) => {
               e.preventDefault();

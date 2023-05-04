@@ -37,7 +37,10 @@ button {
 footer {
   background-color: #292929;
   color: #ffffff;
-  padding: 40px 5%;
+}
+
+.mw-1240 {
+  max-width: 1240px;
 }
 
 .story-tags {
@@ -59,3 +62,5 @@ form img {
 .try-it {
   background-image: url("./assets/images/Rectangle\ 38.png");
 }
+
+
