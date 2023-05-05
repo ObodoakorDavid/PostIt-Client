@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useContext } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useFetch } from "../hooks/useFetch";
 import Loading from "../utils/Loading";
@@ -9,10 +9,8 @@ import Loading from "../utils/Loading";
 const AllUserStories = () => {
   const { token, baseURL } = useContext(AuthContext);
 
-  const { data, error, loading } = useFetch(`${baseURL}/stories/user/`, token);
+  const { data, error, loading } = useFetch(`${baseURL}/api/v1/stories/user/`, token);
 
-
- 
   return (
     <div className="py-4 d-flex flex-column gap-4">
       {loading && <Loading />}
@@ -43,7 +41,11 @@ const AllUserStories = () => {
             </div>
           );
         })}
-      {error && <p>{error}</p>}
+      {error && (
+        <p className="pt-5 text-blue fw-bold fs-3">
+          Oooops! Something Went Wrong, Please Refresh.
+        </p>
+      )}
     </div>
   );
 };

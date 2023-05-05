@@ -12,7 +12,7 @@ const EditStory = () => {
   const { token, baseURL } = useContext(AuthContext);
   const { id } = useParams();
 
-  const { data, loading, error } = useFetch(`${baseURL}/stories/${id}/`, token);
+  const { data, loading, error } = useFetch(`${baseURL}/api/v1/stories/${id}/`, token);
 
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");

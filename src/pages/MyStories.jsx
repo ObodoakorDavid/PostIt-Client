@@ -11,7 +11,6 @@ const MyStories = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.pathname);
     if (location.pathname === "/my-stories") {
       setCurrentSection("/my-stories");
     } else if (location.pathname === "/my-stories/published") {

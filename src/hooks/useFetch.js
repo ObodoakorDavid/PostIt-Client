@@ -9,59 +9,30 @@ export const useFetch = (url, token) => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (token) {
-        fetch(url, {
-          method: "GET",
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-          },
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error("Something Went Wrong");
-            }
-            return res.json();
-          })
-          .then((json) => {
-            setData(json);
-            console.log(json);
-            // setLoading(false);
-          })
-          .catch((err) => {
-            // setLoading(false);
-            setError("Oooops! Something Went Wrong.");
-            console.log(err);
-          })
-          .finally(() => {
-            setLoading(false);
+      try {
+        if (token) {
+          let response = fetch(url, {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
           });
-      } else {
-        fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error("Something Went Wrong");
-            }
-            return res.json();
-          })
-          .then((json) => {
-            setData(json);
-            console.log(json);
-            // setLoading(false);
-          })
-          .catch((err) => {
-            // setLoading(false);
-            setError("Oooops! Something Went Wrong.");
-            console.log(err);
-          })
-          .finally(() => {
-            setLoading(false);
-          });
+          if (!response.ok) {
+            throw new Error("Oooops! Something Went Wrong.");
+          }
+          let data = response.json();
+          setData(data);
+        } else {
+          let response = fetch(url);
+          if (!response.ok) {
+            throw new Error("Oooops! Something Went Wrong.");
+          }
+          let data = response.json();
+          setData(data);
+        }
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
       }
     }, 3000);
   }, [url]);

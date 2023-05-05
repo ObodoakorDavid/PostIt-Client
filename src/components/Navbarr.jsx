@@ -6,7 +6,6 @@ import AuthContext from "../context/AuthContext";
 
 const Navbarr = () => {
   const { token, logOutUser } = useContext(AuthContext);
-  console.log(token);
 
   return (
     <nav className="d-flex justify-content-between align-items-center px-4 py-3 mx-auto mw-1240">

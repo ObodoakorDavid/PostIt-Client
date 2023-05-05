@@ -11,7 +11,7 @@ import Loading from "../utils/Loading";
 
 const Homepage = () => {
   const { baseURL } = useContext(AuthContext);
-  const { data, loading, error } = useFetch(`${baseURL}/stories/`);
+  const { data, loading, error } = useFetch(`${baseURL}/api/v1/stories/`);
 
   return (
     <RootLayout>
@@ -30,7 +30,7 @@ const Homepage = () => {
       </div>
 
       {data && (
-        <div className="d-flex flex-column flex-md-row gap-2 border border-2 mx-4 py-5 border-light rounded-2 mx-auto mw-1240">
+        <div className="d-flex flex-column flex-md-row gap-2 border border-2 border-light my-5 py-5 rounded-2 mx-auto mw-1240">
           {data.slice(0, 3).map((datum) => {
             const { id, title, tags } = datum;
             return (
@@ -59,6 +59,11 @@ const Homepage = () => {
       )}
 
       {loading && <Loading loading={loading} />}
+      {error && (
+        <p className="pt-5 text-blue fw-bold fs-3">
+          Oooops! Something Went Wrong, Please Refresh.
+        </p>
+      )}
 
       <div
         style={{

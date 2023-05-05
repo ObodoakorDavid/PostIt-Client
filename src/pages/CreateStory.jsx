@@ -20,7 +20,7 @@ const CreateStory = () => {
     console.log("working");
     console.log(errors);
     setTimeout(async () => {
-      let response = await fetch(`${baseURL}/stories/create/`, {
+      let response = await fetch(`${baseURL}/api/v1/stories/create/`, {
         method: "POST",
         headers: {
           Authorization: `Token ${token}`,

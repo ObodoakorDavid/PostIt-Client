@@ -14,14 +14,15 @@ export const AuthProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("token")) || null;
   });
   const [authenticating, setaAuthenticating] = useState(false);
-  const baseURL = "http://127.0.0.1:8000/api/v1";
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const baseURL = "http://127.0.0.1:8000";
 
   const navigate = useNavigate();
 
   let login = (body) => {
     setaAuthenticating(true);
     setTimeout(async () => {
-      let response = await fetch(`${baseURL}/auth/token/login/`, {
+      let response = await fetch(`${baseURL}/api/v1/auth/token/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   let getUser = async () => {
-    let response = await fetch(`${baseURL}/auth/users/me`, {
+    let response = await fetch(`${baseURL}/api/v1/auth/users/me`, {
       method: "GET",
       headers: {
         Authorization: `Token ${token}`,
@@ -52,20 +53,22 @@ export const AuthProvider = ({ children }) => {
       },
     });
     let data = await response.json();
-    console.log(data);
     if (data.username) {
       setUser(data);
-      toast.success(`Welcome ${data.username}`, {
-        position: "top-right",
-        id: "welcome",
-      });
-    } else {
-      navigate("/login");
+      if (isLoggedIn === false) {
+        toast.success(`Welcome ${data.username}`, {
+          position: "top-right",
+          id: "welcome",
+        });
+        setIsLoggedIn(true);
+      }
+      return;
     }
+    navigate("/login");
   };
 
   const logOutUser = async () => {
-    let response = await fetch(`${baseURL}/auth/token/logout`, {
+    let response = await fetch(`${baseURL}/api/v1/auth/token/logout`, {
       method: "POST",
       headers: {
         Authorization: `Token ${token}`,
@@ -79,12 +82,13 @@ export const AuthProvider = ({ children }) => {
     toast.success("Log Out Successfull", {
       position: "top-right",
     });
+    localStorage.setItem("loggedIn", JSON.stringify(false));
   };
 
   const signUp = async (body) => {
     setaAuthenticating(true);
     const newBody = { ...body, re_password: body.password };
-    let response = await fetch(`${baseURL}/auth/users/`, {
+    let response = await fetch(`${baseURL}/api/v1/auth/users/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -101,7 +105,6 @@ export const AuthProvider = ({ children }) => {
             position: "top-right",
           });
         });
-        setaAuthenticating(false);
       }
       if (data.email) {
         data.email.forEach((d) => {
@@ -109,13 +112,8 @@ export const AuthProvider = ({ children }) => {
             position: "top-right",
           });
         });
-        setaAuthenticating(false);
       }
-      // toast.error(`Username or email already taken`, {
-      //   position: "top-right",
-      // });
-      // setaAuthenticating(false);
-      console.log(data);
+      setaAuthenticating(false);
       return;
     }
 
@@ -128,10 +126,6 @@ export const AuthProvider = ({ children }) => {
     };
     login(formData);
   };
-
-  useEffect(() => {
-    console.log(token);
-  }, [token]);
 
   const contextData = {
     user,

@@ -10,8 +10,6 @@ const Loading = ({ loading }) => {
     display: "block",
     margin: "0 auto",
   };
-  console.log(loading);
-  console.log(color);
   return (
     <div className="py-5">
       <PuffLoader
