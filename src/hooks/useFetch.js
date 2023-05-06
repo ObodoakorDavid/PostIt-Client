@@ -8,28 +8,35 @@ export const useFetch = (url, token) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      try {
-        if (token) {
-          let response = fetch(url, {
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          });
-          if (!response.ok) {
-            throw new Error("Oooops! Something Went Wrong.");
-          }
-          let data = response.json();
-          setData(data);
-        } else {
-          let response = fetch(url);
-          if (!response.ok) {
-            throw new Error("Oooops! Something Went Wrong.");
-          }
-          let data = response.json();
-          setData(data);
+    async function getData() {
+      if (token) {
+        let response = await fetch(url, {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Oooops! Something Went Wrong.");
         }
+        let data = await response.json();
+        setData(data);
+      } else {
+        let response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Oooops! Something Went Wrong.");
+        }
+        let data = await response.json();
+        setData(data);
+      }
+    }
+
+    // =============== try catch here ==============
+
+    setTimeout(async () => {
+      try {
+        await getData();
       } catch (err) {
+        console.log(err);
         setError(err);
       } finally {
         setLoading(false);
