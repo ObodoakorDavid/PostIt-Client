@@ -29,7 +29,7 @@ const LoginPage = () => {
     if (token) {
       navigate("/dashboard");
     }
-  });
+  }, []);
 
   return (
     <div className="p-5">

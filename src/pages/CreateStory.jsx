@@ -31,7 +31,6 @@ const CreateStory = () => {
       if (response.ok) {
       }
       let data1 = await response.json();
-      console.log(data1);
     }, 1000);
   };
 
