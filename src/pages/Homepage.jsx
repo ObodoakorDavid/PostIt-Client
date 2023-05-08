@@ -69,7 +69,7 @@ const Homepage = () => {
         style={{
           width: "90%",
         }}
-        className="try-it mx-auto py-4 my-5 mw-1240"
+        className="try-it mx-auto py-4 my-5 mw-1240 px-3"
       >
         <h2 className="fw-bold">
           Try Post<span className="text-blue">It</span>.
@@ -79,16 +79,16 @@ const Homepage = () => {
         </p>
         <div
           style={{
-            maxWidth: "500px",
+            maxWidth: "600px",
           }}
-          className="w-75 mx-auto d-flex"
+          className="w-100 mx-auto d-flex"
         >
           <input
             type="text"
             className="w-75 border-0 rounded-start px-3"
             placeholder="Enter Email Address"
           />
-          <button className="btn btn-bg-main text-white w-25 rounded-0 rounded-end fs-4">
+          <button className="btn btn-bg-main text-white w-25 rounded-0 rounded-end fs-4 px-1">
             Get Started
           </button>
         </div>

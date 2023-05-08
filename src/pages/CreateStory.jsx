@@ -5,9 +5,12 @@ import RootLayout from "../layouts/RootLayout";
 import editIcon from "../assets/images/edit.png";
 import { useForm } from "react-hook-form";
 import AuthContext from "../context/AuthContext";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CreateStory = () => {
   const { token, baseURL } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -18,7 +21,6 @@ const CreateStory = () => {
   const onSubmit = (data) => {
     console.log(data);
     console.log("working");
-    console.log(errors);
     setTimeout(async () => {
       let response = await fetch(`${baseURL}/api/v1/stories/create/`, {
         method: "POST",
@@ -28,9 +30,19 @@ const CreateStory = () => {
         },
         body: JSON.stringify(data),
       });
-      if (response.ok) {
+      // =======================
+      if (!response.ok) {
+        toast.error(`Error Occurred, Try Again!`, {
+          position: "top-right",
+        });
+        return;
       }
-      let data1 = await response.json();
+      toast.success(`Story Created Successfully!`, {
+        position: "top-right",
+      });
+      setTimeout(() => {
+        navigate("/my-stories");
+      }, 2000);
     }, 1000);
   };
 
@@ -40,7 +52,7 @@ const CreateStory = () => {
         <h1 className="py-3 fw-bold">Create Story</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="d-flex flex-column gap-4 pb-5"
+          className="d-flex flex-column gap-4 pb-5 text-start fw-semibold"
         >
           <div className=" position-relative">
             <img
@@ -54,8 +66,17 @@ const CreateStory = () => {
               placeholder="Title"
               {...register("title", {
                 required: true,
+                maxLength: 30,
               })}
             />
+            {errors.title && errors.title.type === "required" && (
+              <span className="text-danger">The field is required!</span>
+            )}
+            {errors.title && errors.title.type === "maxLength" && (
+              <span className="text-danger">
+                Shouldn't be more than 10 characters.
+              </span>
+            )}
           </div>
           <div className=" position-relative">
             <img
@@ -69,8 +90,15 @@ const CreateStory = () => {
               placeholder="Tags"
               {...register("tags", {
                 required: true,
+                maxLength: 10,
               })}
             />
+            {errors.tags && errors.tags.type === "required" && (
+              <span className="text-danger">The field is required!</span>
+            )}
+            {errors.tags && errors.tags.type === "maxLength" && (
+              <span className="text-danger">Shouldn't be more than 10.</span>
+            )}
           </div>
           <div className=" position-relative">
             <img
@@ -89,6 +117,9 @@ const CreateStory = () => {
                 required: true,
               })}
             ></textarea>
+            {errors.story && errors.story.type === "required" && (
+              <span className="text-danger">The field is required!</span>
+            )}
           </div>
           <button className="btn btn-bg-main w-50 mx-auto text-white">
             Publish Story

@@ -42,7 +42,7 @@ export const useFetch = (url, token) => {
         setLoading(false);
       }
     }, 3000);
-  }, [url]);
+  }, [url, token]);
 
   return { data, error, loading };
 };
