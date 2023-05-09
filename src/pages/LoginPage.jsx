@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { login, authenticating, token } = useContext(AuthContext);
-  const isAuthenticating = authenticating ? "spinner-border mx-auto" : "";
+  const btnText = authenticating ? "Authenticating..." : "Continue";
 
   const {
     register,
@@ -53,11 +53,6 @@ const LoginPage = () => {
           {errors.email && errors.email.type === "required" && (
             <span className=" text-danger">The field is required!</span>
           )}
-          {/* {errors.email && errors.email.type === "minLength" && (
-            <p className="text-danger">
-              Email should be at-least 6 characters.
-            </p>
-          )} */}
         </div>
         <div className="d-flex flex-column gap-1">
           <label className="d-block py-2 fw-semibold" htmlFor="password">
@@ -67,22 +62,20 @@ const LoginPage = () => {
             className=" border-0 border-bottom border-secondary border-1 py-2"
             id="password"
             type="password"
-            {...register("password", { required: true, minLength: 6 })}
+            {...register("password", { required: true })}
           />
           {errors.password && (
             <span className="text-danger">The field is required!</span>
           )}
-          {errors.password && errors.password.type === "minLength" && (
-            <p className=" text-danger">
-              password should be at-least 6 characters.
-            </p>
-          )}
         </div>
         <button
           disabled={authenticating}
-          className={`btn btn-bg-main text-white my-3 ${isAuthenticating}`}
+          className="btn my-3 btn-bg-main d-flex gap-2 align-items-center justify-content-center"
         >
-          Continue
+          {authenticating && (
+            <span className="spinner-border spinner-border-sm text-white"></span>
+          )}
+          <span className="text-white fs-4 fw-semibold">{btnText}</span>
         </button>
       </form>
       <p className="fw-bold">

@@ -100,24 +100,20 @@ export const AuthProvider = ({ children }) => {
 
     if (response.status === 400) {
       if (data.password) {
-        data.password.forEach((d) => {
-          toast.error(d, {
-            position: "top-right",
-          });
+        toast.error(data.password[0], {
+          position: "top-right",
         });
       }
       if (data.email) {
-        data.email.forEach((d) => {
-          toast.error(d, {
-            position: "top-right",
-          });
+        toast.error(data.email[0], {
+          position: "top-right",
         });
       }
       setaAuthenticating(false);
       return;
     }
 
-    toast.success(`Registration Successful`, {
+    toast.success(`Registration Successfull`, {
       position: "top-right",
     });
     const formData = {

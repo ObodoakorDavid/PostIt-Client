@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const SignupPage = () => {
   const { signUp, token, authenticating } = useContext(AuthContext);
   const isAuthenticating = authenticating ? "spinner-border mx-auto" : "";
+  const btnText = authenticating ? "Please wait..." : "Continue";
 
   const {
     register,
@@ -80,14 +81,17 @@ const SignupPage = () => {
             type="password"
             {...register("password", {
               required: true,
-              minLength: 7,
             })}
           />
         </div>
         <button
-          className={`btn btn-bg-main text-white my-3 ${isAuthenticating}`}
+          disabled={authenticating}
+          className="btn my-3 btn-bg-main d-flex gap-2 align-items-center justify-content-center"
         >
-          Continue
+          {authenticating && (
+            <span className="spinner-border spinner-border-sm text-white"></span>
+          )}
+          <span className="text-white fs-4 fw-semibold">{btnText}</span>
         </button>
       </form>
       <p className="fw-bold">
