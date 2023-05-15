@@ -10,9 +10,9 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() => {
-    return JSON.parse(localStorage.getItem("token")) || null;
-  });
+  const [token, setToken] = useState(
+    () => JSON.parse(localStorage.getItem("token")) || null
+  );
   const [authenticating, setaAuthenticating] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const baseURL = "http://127.0.0.1:8000";
@@ -103,9 +103,12 @@ export const AuthProvider = ({ children }) => {
         toast.error(data.password[0], {
           position: "top-right",
         });
-      }
-      if (data.email) {
+      } else if (data.email) {
         toast.error(data.email[0], {
+          position: "top-right",
+        });
+      } else if (data.password) {
+        toast.error(data.password[0], {
           position: "top-right",
         });
       }
