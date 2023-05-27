@@ -6,10 +6,20 @@ import profilePicture from "../assets/images/profile_picture.png";
 import { Link } from "react-router-dom";
 
 const StoryCard = ({ story }) => {
+  // console.log(`http://127.0.0.1:8000${story.image_url}`);
   return (
     <div className="text-start col-sm-6 col-md-4">
       <div className=" position-relative">
-        <img className="w-100" src={lifestyle} alt="" />
+        <img
+          className="w-100"
+          src={
+            story.image_url
+              ? `http://127.0.0.1:8000${story.image_url}`
+              : lifestyle
+          }
+          alt=""
+        />
+        {/* <img className="w-100" src={story.image_url} alt="" /> */}
         <button className="story-tags bg-primary btn text-white px-2 py-0">
           {story.tags}
         </button>
@@ -23,7 +33,12 @@ const StoryCard = ({ story }) => {
         </p>
       </div>
       <p className="py-3">{story.story}</p>
-      <Link to={`/story/${story.id}`} className=" text-decoration-none text-blue">Read More...</Link>
+      <Link
+        to={`/story/${story.id}`}
+        className=" text-decoration-none text-blue"
+      >
+        Read More...
+      </Link>
     </div>
   );
 };

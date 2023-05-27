@@ -20,6 +20,7 @@ export const useFetch = (url, token) => {
         }
         let data = await response.json();
         setData(data);
+        console.log(data);
       } else {
         let response = await fetch(url);
         if (!response.ok) {
@@ -27,6 +28,7 @@ export const useFetch = (url, token) => {
         }
         let data = await response.json();
         setData(data);
+        console.log(data);
       }
     }
 

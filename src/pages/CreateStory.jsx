@@ -78,7 +78,7 @@ const CreateStory = () => {
               </span>
             )}
           </div>
-          <div className=" position-relative">
+          <div className="position-relative">
             <img
               className=" position-absolute bg-white p-1"
               src={editIcon}
